@@ -1,0 +1,117 @@
+name: Build and release
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate Windows build
+    if: github.event_name == 'pull_request' || github.ref_name != github.event.repository.default_branch
+    runs-on: windows-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Set up .NET 8
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          dotnet-version: 8.0.x
+      - name: Compile
+        run: dotnet build .\src\KeyboardLocker\KeyboardLocker.csproj --configuration Release
+
+  release:
+    name: Publish GitHub release
+    if: github.event_name == 'push' && github.ref_name == github.event.repository.default_branch
+    runs-on: windows-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Set up .NET 8
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          dotnet-version: 8.0.x
+      - name: Publish portable Windows x64 application
+        shell: pwsh
+        run: |
+          $project = [xml](Get-Content '.\src\KeyboardLocker\KeyboardLocker.csproj' -Raw)
+          $version = [string]$project.Project.PropertyGroup.Version
+          if ($version -notmatch '^\d+\.\d+\.\d+\.\d+$') {
+            throw "Expected a four-part project version, received '$version'."
+          }
+
+          $manifest = [xml](Get-Content '.\src\KeyboardLocker\app.manifest' -Raw)
+          $identity = $manifest.SelectSingleNode("/*[local-name()='assembly']/*[local-name()='assemblyIdentity']")
+          if ($identity.GetAttribute('version') -ne $version) {
+            throw 'The project and Windows manifest versions must match.'
+          }
+
+          $publishPath = '.\artifacts\publish'
+          New-Item -ItemType Directory -Force -Path $publishPath | Out-Null
+          dotnet publish '.\src\KeyboardLocker\KeyboardLocker.csproj' `
+            --configuration Release `
+            --runtime win-x64 `
+            --self-contained true `
+            --output $publishPath `
+            -p:Version=$version `
+            -p:AssemblyVersion=$version `
+            -p:FileVersion=$version `
+            -p:InformationalVersion="$version+build.$env:GITHUB_RUN_NUMBER" `
+            -p:PublishSingleFile=true `
+            -p:IncludeNativeLibrariesForSelfExtract=true
+          if ($LASTEXITCODE -ne 0) { throw 'dotnet publish failed.' }
+
+          Copy-Item '.\README.md', '.\LICENCE.md' -Destination $publishPath
+          $tag = "v${version}_build-$env:GITHUB_RUN_NUMBER"
+          $archive = ".\artifacts\KeyboardLocker-$tag-win-x64.zip"
+          Compress-Archive -Path "$publishPath\*" -DestinationPath $archive -Force
+          "TAG_NAME=$tag" >> $env:GITHUB_ENV
+          "ASSET_PATH=$archive" >> $env:GITHUB_ENV
+          "ASSET_NAME=$(Split-Path $archive -Leaf)" >> $env:GITHUB_ENV
+      - name: Create or update the GitHub prerelease
+        shell: pwsh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $api = "https://api.github.com/repos/$env:GITHUB_REPOSITORY"
+          $headers = @{
+            Authorization = "Bearer $env:GITHUB_TOKEN"
+            Accept = 'application/vnd.github+json'
+            'X-GitHub-Api-Version' = '2022-11-28'
+          }
+
+          $release = $null
+          try {
+            $release = Invoke-RestMethod -Method Get -Uri "$api/releases/tags/$env:TAG_NAME" -Headers $headers
+          }
+          catch {
+            if ([int]$_.Exception.Response.StatusCode -ne 404) { throw }
+          }
+
+          if ($null -eq $release) {
+            $payload = @{
+              tag_name = $env:TAG_NAME
+              target_commitish = $env:GITHUB_SHA
+              name = $env:TAG_NAME
+              body = "Build automatique $env:TAG_NAME. Archive Windows x64 portable incluse."
+              draft = $false
+              prerelease = $true
+              generate_release_notes = $true
+            } | ConvertTo-Json -Depth 4
+            $release = Invoke-RestMethod -Method Post -Uri "$api/releases" -Headers $headers -ContentType 'application/json' -Body $payload
+          }
+          else {
+            foreach ($asset in $release.assets | Where-Object { $_.name -eq $env:ASSET_NAME }) {
+              Invoke-RestMethod -Method Delete -Uri "$api/releases/assets/$($asset.id)" -Headers $headers | Out-Null
+            }
+          }
+
+          $uploadUri = $release.upload_url -replace '\{\?name,label\}', "?name=$([uri]::EscapeDataString($env:ASSET_NAME))"
+          Invoke-WebRequest -Method Post -Uri $uploadUri -Headers $headers -ContentType 'application/octet-stream' -InFile $env:ASSET_PATH | Out-Null
