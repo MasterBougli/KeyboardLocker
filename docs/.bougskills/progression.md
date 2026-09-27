@@ -15,7 +15,9 @@
 - Licence : GPL-3.0 ; auteur et titulaire : Bougli ; année : 2026.
 - Contributions externes acceptées ; changelog souhaité ; GitHub choisi pour l’hébergement et les releases.
 - Livraison : compilation sur pull request et publication d’une release à chaque push sur la branche par défaut ; tags de la forme `v<version>_build-<numéro>`.
-- Version produit actuellement documentée : 1.0.0.8.
+- Distribution confirmée : autonome, sans runtime préinstallé ; environ 70 Mo est acceptable.
+- Les deux workflows GitHub Actions des pushes initiaux se sont terminés avec succès et ont publié les releases `v1.0.0.7_build-1` et `v1.0.0.8_build-2`.
+- Version produit actuellement documentée : 1.0.0.9.
 
 ## Fichiers documentaires présents
 
@@ -27,9 +29,9 @@
 
 - Le dépôt public `https://github.com/MasterBougli/KeyboardLocker` est créé ; `main` suit `origin/main`.
 - Le commit initial `6952dfb` a été poussé ; la progression indique le commit de suivi en préparation.
-- Le workflow GitHub Actions a été déclenché par le push initial ; son résultat n’a pas encore été vérifié.
+- Les deux releases initiales sont publiques et contiennent leur archive Windows x64 autonome d’environ 67,7 Mo.
 - Les essais fonctionnels manuels Windows restent à effectuer.
 
 ## Prochaine action autorisée
 
-Pousser la mise à jour de progression/version, puis vérifier le résultat du workflow GitHub Actions lorsque cette vérification est autorisée.
+Pousser la décision de distribution autonome et la version 1.0.0.9 ; vérifier ensuite la release générée par le workflow.

@@ -2,6 +2,13 @@
 
 Les changements notables du projet sont consignés dans ce fichier.
 
+## [1.0.0.9] - 2026-09-27
+
+### Modifié
+
+- Décision confirmée : conserver une distribution autonome ; une archive d’environ 70 Mo est acceptable.
+- Version du projet avancée de `1.0.0.8` à `1.0.0.9`.
+
 ## [1.0.0.8] - 2026-09-27
 
 ### Modifié
