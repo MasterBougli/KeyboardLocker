@@ -1,6 +1,6 @@
 # Exigences produit
 
-**Statut : Brouillon** — **Dernière mise à jour : 2026-09-26**
+**Statut : Brouillon** — **Dernière mise à jour : 2026-09-27**
 
 ## Objectif
 
@@ -10,6 +10,7 @@ Permettre à une personne de nettoyer un clavier Windows sans le débrancher, en
 
 - Windows 10/11, application de bureau portable et autonome, sans runtime .NET préinstallé ; une archive proche de 70 Mo est acceptable.
 - Le délai de sécurité continue de s’écouler pendant la veille et l’hibernation ; si l’échéance est dépassée, le clavier est libéré à la reprise de la boucle de messages.
+- La fenêtre reste lisible après redimensionnement et changement de mise à l’échelle DPI, y compris entre écrans configurés différemment.
 - Verrouillage depuis un bouton, délai de sécurité réglable de 1 à 60 minutes (5 minutes par défaut), déverrouillage souris et icône de notification.
 - Option de mode de verrouillage pour `Alt+F4` : laisser cette combinaison fonctionner, ou la bloquer avec les autres frappes. Par défaut, `Alt+F4` est bloqué. La souris doit rester utilisable.
 - Toutes les frappes clavier, y compris les touches Windows, sont bloquées par défaut ; seule l’option `Alt+F4` permet une exception contrôlée par l’utilisateur.

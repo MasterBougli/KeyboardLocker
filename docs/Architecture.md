@@ -1,10 +1,10 @@
 # Architecture
 
-**Statut : Brouillon** — **Dernière mise à jour : 2026-09-26**
+**Statut : Brouillon** — **Dernière mise à jour : 2026-09-27**
 
 ## Choix
 
-C# avec WinForms et .NET 8 pour s’appuyer sur les API Windows sans bibliothèque tierce. La publication autonome en fichier unique inclut le runtime pour éviter tout prérequis d’installation ; une archive proche de 70 Mo est acceptable. La réduction par trimming n’est pas retenue pour WinForms.
+C# avec WinForms et .NET 8 pour s’appuyer sur les API Windows sans bibliothèque tierce. `ApplicationHighDpiMode=PerMonitorV2` et une mise en page fondée sur `TableLayoutPanel`/`FlowLayoutPanel` permettent d’adapter les contrôles au redimensionnement et au DPI de chaque écran. La publication autonome en fichier unique inclut le runtime pour éviter tout prérequis d’installation ; une archive proche de 70 Mo est acceptable. La réduction par trimming n’est pas retenue pour WinForms.
 
 ## Composants
 

@@ -18,8 +18,9 @@ internal sealed class MainForm : Form
     public MainForm()
     {
         Text = "Keyboard Locker";
-        MinimumSize = new Size(440, 400);
-        Size = new Size(440, 410);
+        AutoScaleMode = AutoScaleMode.Dpi;
+        MinimumSize = new Size(400, 390);
+        Size = new Size(480, 440);
         StartPosition = FormStartPosition.CenterScreen;
         BackColor = Color.FromArgb(246, 248, 251);
         Font = new Font("Segoe UI", 10);
@@ -33,35 +34,71 @@ internal sealed class MainForm : Form
         _tray = new NotifyIcon { Icon = icon, Text = "Keyboard Locker", ContextMenuStrip = menu, Visible = true };
         _tray.DoubleClick += (_, _) => ShowWindow();
 
-        var panel = new Panel { Dock = DockStyle.Fill, Padding = new Padding(28) };
-        Controls.Add(panel);
-        var title = new Label { Text = "Nettoyage du clavier", Font = new Font("Segoe UI Semibold", 17), AutoSize = true, Location = new Point(28, 24) };
-        panel.Controls.Add(title);
-        _status.SetBounds(30, 74, 350, 28);
+        var layout = new TableLayoutPanel
+        {
+            Dock = DockStyle.Fill,
+            ColumnCount = 1,
+            RowCount = 7,
+            Padding = new Padding(26),
+            GrowStyle = TableLayoutPanelGrowStyle.FixedSize
+        };
+        layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+        for (var row = 0; row < layout.RowCount; row++)
+            layout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+        Controls.Add(layout);
+
+        var title = new Label
+        {
+            Text = "Nettoyage du clavier",
+            Font = new Font("Segoe UI Semibold", 17),
+            AutoSize = true,
+            Margin = new Padding(0, 0, 0, 12)
+        };
+        layout.Controls.Add(title, 0, 0);
+        _status.AutoSize = true;
+        _status.Margin = new Padding(0, 0, 0, 6);
         _status.ForeColor = Color.FromArgb(75, 85, 99);
-        panel.Controls.Add(_status);
-        _remaining.SetBounds(30, 105, 350, 28);
-        panel.Controls.Add(_remaining);
+        layout.Controls.Add(_status, 0, 1);
+        _remaining.AutoSize = true;
+        _remaining.Margin = new Padding(0, 0, 0, 18);
+        layout.Controls.Add(_remaining, 0, 2);
 
-        var delayLabel = new Label { Text = "Déverrouillage automatique après", AutoSize = true, Location = new Point(30, 155) };
-        panel.Controls.Add(delayLabel);
-        _minutes.SetBounds(30, 182, 74, 30);
-        panel.Controls.Add(_minutes);
-        panel.Controls.Add(new Label { Text = "minutes", AutoSize = true, Location = new Point(112, 188) });
+        var delayLabel = new Label
+        {
+            Text = "Déverrouillage automatique après",
+            AutoSize = true,
+            Margin = new Padding(0, 0, 0, 6)
+        };
+        layout.Controls.Add(delayLabel, 0, 3);
+        var delayRow = new FlowLayoutPanel
+        {
+            AutoSize = true,
+            AutoSizeMode = AutoSizeMode.GrowAndShrink,
+            Dock = DockStyle.Fill,
+            FlowDirection = FlowDirection.LeftToRight,
+            WrapContents = false,
+            Margin = new Padding(0, 0, 0, 8)
+        };
+        _minutes.Margin = new Padding(0, 0, 8, 0);
+        delayRow.Controls.Add(_minutes);
+        delayRow.Controls.Add(new Label { Text = "minutes", AutoSize = true, Margin = new Padding(0, 7, 0, 0) });
+        layout.Controls.Add(delayRow, 0, 4);
 
-        _allowAltF4.SetBounds(30, 220, 350, 28);
+        _allowAltF4.Margin = new Padding(0, 12, 0, 12);
         _allowAltF4.CheckedChanged += (_, _) => _hook.AllowAltF4 = _allowAltF4.Checked;
-        panel.Controls.Add(_allowAltF4);
+        layout.Controls.Add(_allowAltF4, 0, 5);
 
         _toggle.Text = "Verrouiller le clavier";
-        _toggle.SetBounds(30, 262, 350, 48);
+        _toggle.Dock = DockStyle.Fill;
+        _toggle.Height = 52;
+        _toggle.Margin = new Padding(0, 6, 0, 0);
         _toggle.FlatStyle = FlatStyle.Flat;
         _toggle.FlatAppearance.BorderSize = 0;
         _toggle.BackColor = Color.FromArgb(37, 99, 235);
         _toggle.ForeColor = Color.White;
         _toggle.Font = new Font("Segoe UI Semibold", 11);
         _toggle.Click += (_, _) => { if (_locked) Unlock(); else Lock(); };
-        panel.Controls.Add(_toggle);
+        layout.Controls.Add(_toggle, 0, 6);
         _timer.Tick += (_, _) => UpdateCountdown();
         FormClosing += (_, _) => Unlock();
         Resize += (_, _) => { if (WindowState == FormWindowState.Minimized) Hide(); };

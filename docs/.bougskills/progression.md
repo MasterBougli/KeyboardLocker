@@ -19,7 +19,8 @@
 - Les deux workflows GitHub Actions des pushes initiaux se sont terminés avec succès et ont publié les releases `v1.0.0.7_build-1` et `v1.0.0.8_build-2`.
 - Tests choisis : checklist manuelle uniquement ; aucun framework de test ni dépendance ajoutés.
 - Décision confirmée : le délai continue pendant veille et hibernation et ne doit pas dépendre des changements de l’horloge civile.
-- Version produit actuellement documentée : 1.0.0.11.
+- Amélioration d’interface retenue : mise en page adaptative et prise en charge par écran de PerMonitorV2, sans changement de style ou de texte.
+- Version produit actuellement documentée : 1.0.0.12.
 
 ## Fichiers documentaires présents
 
@@ -35,4 +36,4 @@
 
 ## Prochaine action autorisée
 
-Compiler et publier la version 1.0.0.11, puis vérifier le déverrouillage à l’échéance et la reprise de veille selon `docs/testing.md` ; ces essais restent à effectuer.
+Compiler et publier la version 1.0.0.12, puis vérifier le redimensionnement, l’échelle DPI et la reprise de veille selon `docs/testing.md` ; ces essais restent à effectuer.

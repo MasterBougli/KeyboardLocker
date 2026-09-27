@@ -41,7 +41,7 @@ Cette version s’appuie sur une checklist manuelle. Aucun framework ni package 
 ## Compatibilité et livraison
 
 - Refaire les parcours principaux sous Windows 10 et Windows 11, sur chaque architecture effectivement publiée.
-- Vérifier l’affichage à l’échelle Windows par défaut et avec une mise à l’échelle supérieure.
+- Vérifier l’affichage en redimensionnant la fenêtre, à 100 %, 150 % et 200 % de mise à l’échelle Windows, puis en déplaçant la fenêtre entre deux écrans configurés à des échelles différentes.
 - Publier le binaire autonome, le lancer sur une machine de test sans runtime .NET préinstallé et refaire les parcours principaux.
 - Confirmer dans GitHub Actions que le build réussit et que l’archive de release contient l’exécutable et les documents annoncés.
 

@@ -2,6 +2,13 @@
 
 Les changements notables du projet sont consignés dans ce fichier.
 
+## [1.0.0.12] - 2026-09-27
+
+### Modifié
+
+- Interface organisée dans des conteneurs adaptatifs et mise à l’échelle par écran avec PerMonitorV2.
+- Version du projet avancée de `1.0.0.11` à `1.0.0.12`.
+
 ## [1.0.0.11] - 2026-09-27
 
 ### Modifié

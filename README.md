@@ -1,6 +1,6 @@
 # Keyboard Locker
 
-**Statut :** Première version — **Dernière mise à jour :** 2026-09-26
+**Statut :** Première version — **Dernière mise à jour :** 2026-09-27
 
 Petit utilitaire Windows portable pour bloquer les frappes du clavier pendant le nettoyage. La souris reste utilisable et une icône de notification donne accès au déverrouillage.
 
@@ -10,6 +10,7 @@ Petit utilitaire Windows portable pour bloquer les frappes du clavier pendant le
 - Déverrouillage par clic souris dans la fenêtre ou depuis le menu de l’icône de notification.
 - Déverrouillage automatique à l’échéance ; fermeture de l’application libère aussi le clavier.
 - Le délai continue pendant la veille et l’hibernation ; un changement de l’heure système ne le prolonge pas.
+- Interface adaptée au redimensionnement et aux changements d’échelle DPI par écran.
 - Case « Autoriser Alt+F4 pendant le verrouillage », décochée par défaut.
 - Windows 10/11, sans service, télémétrie ni dépendance tierce.
 
@@ -40,7 +41,7 @@ Toutes les frappes clavier, y compris les touches Windows, sont filtrées par d�
 
 ## Compilation et releases automatiques
 
-La GitHub Action compile l’application sur les pull requests et crée une release Windows x64 à chaque push sur la branche par défaut. Les tags suivent le format `v<version>_build-<numéro>`, par exemple `v1.0.0.11_build-5`. Le workflow utilise le `GITHUB_TOKEN` du dépôt avec la permission `contents: write`; aucun secret personnel n’est requis. Voir [`.github/workflows/build-release.yml`](.github/workflows/build-release.yml).
+La GitHub Action compile l’application sur les pull requests et crée une release Windows x64 à chaque push sur la branche par défaut. Les tags suivent le format `v<version>_build-<numéro>`, par exemple `v1.0.0.12_build-6`. Le workflow utilise le `GITHUB_TOKEN` du dépôt avec la permission `contents: write`; aucun secret personnel n’est requis. Voir [`.github/workflows/build-release.yml`](.github/workflows/build-release.yml).
 
 ## Documentation
 
