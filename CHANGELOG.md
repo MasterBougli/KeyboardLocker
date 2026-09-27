@@ -2,6 +2,13 @@
 
 Les changements notables du projet sont consignés dans ce fichier.
 
+## [1.0.0.13] - 2026-09-27
+
+### Modifié
+
+- Remplacement du bouclier système par une icône clavier/cadenas intégrée à l’exécutable et utilisée dans la fenêtre et la zone de notification.
+- Version du projet avancée de `1.0.0.12` à `1.0.0.13`.
+
 ## [1.0.0.12] - 2026-09-27
 
 ### Modifié

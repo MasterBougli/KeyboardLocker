@@ -11,6 +11,7 @@ Petit utilitaire Windows portable pour bloquer les frappes du clavier pendant le
 - Déverrouillage automatique à l’échéance ; fermeture de l’application libère aussi le clavier.
 - Le délai continue pendant la veille et l’hibernation ; un changement de l’heure système ne le prolonge pas.
 - Interface adaptée au redimensionnement et aux changements d’échelle DPI par écran.
+- Icône clavier/cadenas personnalisée dans la fenêtre, l’exécutable et la zone de notification.
 - Case « Autoriser Alt+F4 pendant le verrouillage », décochée par défaut.
 - Windows 10/11, sans service, télémétrie ni dépendance tierce.
 
@@ -41,7 +42,7 @@ Toutes les frappes clavier, y compris les touches Windows, sont filtrées par d�
 
 ## Compilation et releases automatiques
 
-La GitHub Action compile l’application sur les pull requests et crée une release Windows x64 à chaque push sur la branche par défaut. Les tags suivent le format `v<version>_build-<numéro>`, par exemple `v1.0.0.12_build-6`. Le workflow utilise le `GITHUB_TOKEN` du dépôt avec la permission `contents: write`; aucun secret personnel n’est requis. Voir [`.github/workflows/build-release.yml`](.github/workflows/build-release.yml).
+La GitHub Action compile l’application sur les pull requests et crée une release Windows x64 à chaque push sur la branche par défaut. Les tags suivent le format `v<version>_build-<numéro>`, par exemple `v1.0.0.13_build-<numéro>`. Le workflow utilise le `GITHUB_TOKEN` du dépôt avec la permission `contents: write`; aucun secret personnel n’est requis. Voir [`.github/workflows/build-release.yml`](.github/workflows/build-release.yml).
 
 ## Documentation
 

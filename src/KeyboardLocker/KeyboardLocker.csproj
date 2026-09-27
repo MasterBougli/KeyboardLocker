@@ -8,10 +8,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyName>KeyboardLocker</AssemblyName>
     <RootNamespace>KeyboardLocker</RootNamespace>
-    <Version>1.0.0.12</Version>
-    <AssemblyVersion>1.0.0.12</AssemblyVersion>
-    <FileVersion>1.0.0.12</FileVersion>
+    <Version>1.0.0.13</Version>
+    <AssemblyVersion>1.0.0.13</AssemblyVersion>
+    <FileVersion>1.0.0.13</FileVersion>
     <Copyright>Copyright (C) 2026 Bougli</Copyright>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>..\..\assets\KeyboardLocker.ico</ApplicationIcon>
   </PropertyGroup>
 </Project>

@@ -12,6 +12,7 @@ internal sealed class MainForm : Form
     private readonly NumericUpDown _minutes = new() { Minimum = 1, Maximum = 60, Value = 5, Width = 72 };
     private readonly CheckBox _allowAltF4 = new() { Text = "Autoriser Alt+F4 pendant le verrouillage", AutoSize = true };
     private readonly NotifyIcon _tray;
+    private readonly Icon _appIcon;
     private long _unlockAtTickCount;
     private bool _locked;
 
@@ -25,13 +26,13 @@ internal sealed class MainForm : Form
         BackColor = Color.FromArgb(246, 248, 251);
         Font = new Font("Segoe UI", 10);
 
-        var icon = SystemIcons.Shield;
-        Icon = icon;
+        _appIcon = Icon.ExtractAssociatedIcon(Application.ExecutablePath) ?? (Icon)SystemIcons.Shield.Clone();
+        Icon = _appIcon;
         var menu = new ContextMenuStrip();
         menu.Items.Add("Ouvrir", null, (_, _) => ShowWindow());
         menu.Items.Add("Déverrouiller", null, (_, _) => Unlock());
         menu.Items.Add("Quitter", null, (_, _) => Close());
-        _tray = new NotifyIcon { Icon = icon, Text = "Keyboard Locker", ContextMenuStrip = menu, Visible = true };
+        _tray = new NotifyIcon { Icon = _appIcon, Text = "Keyboard Locker", ContextMenuStrip = menu, Visible = true };
         _tray.DoubleClick += (_, _) => ShowWindow();
 
         var layout = new TableLayoutPanel
@@ -153,5 +154,6 @@ internal sealed class MainForm : Form
     {
         if (disposing) { Unlock(); _timer.Dispose(); _tray.Visible = false; _tray.Dispose(); }
         base.Dispose(disposing);
+        if (disposing) _appIcon.Dispose();
     }
 }
