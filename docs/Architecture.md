@@ -13,7 +13,7 @@ C# avec WinForms et .NET 8 pour s’appuyer sur les API Windows sans bibliothèq
 - `KeyboardHook.cs` installe et retire le hook `WH_KEYBOARD_LL`.
 - Le réglage `Alt+F4` décide si l’état Alt/F4 est transmis à Windows pendant le verrouillage. Les autres frappes sont bloquées.
 
-Le hook est maintenu par la boucle de messages de l’interface. Le timer vérifie l’échéance. À l’arrêt normal, le hook est retiré ; en cas d’arrêt du processus, Windows le retire avec le processus.
+Le hook est maintenu par la boucle de messages de l’interface. Le timer vérifie l’échéance toutes les 250 ms à partir de `Environment.TickCount64`, sans dépendre des changements de l’horloge civile. Sur .NET 8 pour Windows, cette horloge inclut le temps en veille et en hibernation ; si l’échéance survient pendant la veille, le déverrouillage a lieu au prochain tick de la boucle à la reprise. À l’arrêt normal, le hook est retiré ; en cas d’arrêt du processus, Windows le retire avec le processus.
 
 ## Compilation et publication
 

@@ -18,7 +18,8 @@
 - Distribution confirmée : autonome, sans runtime préinstallé ; environ 70 Mo est acceptable.
 - Les deux workflows GitHub Actions des pushes initiaux se sont terminés avec succès et ont publié les releases `v1.0.0.7_build-1` et `v1.0.0.8_build-2`.
 - Tests choisis : checklist manuelle uniquement ; aucun framework de test ni dépendance ajoutés.
-- Version produit actuellement documentée : 1.0.0.10.
+- Décision confirmée : le délai continue pendant veille et hibernation et ne doit pas dépendre des changements de l’horloge civile.
+- Version produit actuellement documentée : 1.0.0.11.
 
 ## Fichiers documentaires présents
 
@@ -29,10 +30,9 @@
 ## Points ouverts
 
 - Le dépôt public `https://github.com/MasterBougli/KeyboardLocker` est créé ; `main` suit `origin/main`.
-- Le commit initial `6952dfb` a été poussé ; la progression indique le commit de suivi en préparation.
-- Les deux releases initiales sont publiques et contiennent leur archive Windows x64 autonome d’environ 67,7 Mo.
+- Les releases `v1.0.0.7_build-1` et `v1.0.0.8_build-2` sont vérifiées et contiennent l’archive Windows x64 autonome d’environ 67,7 Mo.
 - Les essais fonctionnels manuels Windows restent à effectuer.
 
 ## Prochaine action autorisée
 
-Faire les vérifications manuelles décrites dans `docs/testing.md` sur Windows ; elles restent à effectuer.
+Compiler et publier la version 1.0.0.11, puis vérifier le déverrouillage à l’échéance et la reprise de veille selon `docs/testing.md` ; ces essais restent à effectuer.

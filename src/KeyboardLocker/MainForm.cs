@@ -12,7 +12,7 @@ internal sealed class MainForm : Form
     private readonly NumericUpDown _minutes = new() { Minimum = 1, Maximum = 60, Value = 5, Width = 72 };
     private readonly CheckBox _allowAltF4 = new() { Text = "Autoriser Alt+F4 pendant le verrouillage", AutoSize = true };
     private readonly NotifyIcon _tray;
-    private DateTime _unlockAt;
+    private long _unlockAtTickCount;
     private bool _locked;
 
     public MainForm()
@@ -74,7 +74,7 @@ internal sealed class MainForm : Form
         {
             _hook.Start();
             _locked = true;
-            _unlockAt = DateTime.UtcNow.AddMinutes((double)_minutes.Value);
+            _unlockAtTickCount = Environment.TickCount64 + (long)TimeSpan.FromMinutes((double)_minutes.Value).TotalMilliseconds;
             _minutes.Enabled = false;
             _timer.Start();
             _tray.ShowBalloonTip(1500, "Clavier verrouillé", "Clic droit sur l’icône pour déverrouiller.", ToolTipIcon.Info);
@@ -98,7 +98,7 @@ internal sealed class MainForm : Form
 
     private void UpdateCountdown()
     {
-        if (DateTime.UtcNow >= _unlockAt) { Unlock(); _tray.ShowBalloonTip(1500, "Clavier déverrouillé", "Le délai de sécurité est écoulé.", ToolTipIcon.Info); }
+        if (Environment.TickCount64 >= _unlockAtTickCount) { Unlock(); _tray.ShowBalloonTip(1500, "Clavier déverrouillé", "Le délai de sécurité est écoulé.", ToolTipIcon.Info); }
         else RefreshUi();
     }
 
@@ -107,7 +107,7 @@ internal sealed class MainForm : Form
         _status.Text = _locked ? "Clavier verrouillé · souris disponible" : "Prêt à verrouiller le clavier";
         _toggle.Text = _locked ? "Déverrouiller" : "Verrouiller le clavier";
         _toggle.BackColor = _locked ? Color.FromArgb(220, 38, 38) : Color.FromArgb(37, 99, 235);
-        _remaining.Text = _locked ? $"Déverrouillage automatique dans {Math.Max(0, (int)Math.Ceiling((_unlockAt - DateTime.UtcNow).TotalMinutes))} min" : "La souris reste toujours utilisable.";
+        _remaining.Text = _locked ? $"Déverrouillage automatique dans {Math.Max(0, (int)Math.Ceiling((_unlockAtTickCount - Environment.TickCount64) / 60_000d))} min" : "La souris reste toujours utilisable.";
     }
 
     private void ShowWindow() { Show(); WindowState = FormWindowState.Normal; Activate(); }

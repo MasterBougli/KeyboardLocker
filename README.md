@@ -9,6 +9,7 @@ Petit utilitaire Windows portable pour bloquer les frappes du clavier pendant le
 - Bouton « Verrouiller le clavier » et réglage du délai de sécurité (1 à 60 minutes, 5 par défaut).
 - Déverrouillage par clic souris dans la fenêtre ou depuis le menu de l’icône de notification.
 - Déverrouillage automatique à l’échéance ; fermeture de l’application libère aussi le clavier.
+- Le délai continue pendant la veille et l’hibernation ; un changement de l’heure système ne le prolonge pas.
 - Case « Autoriser Alt+F4 pendant le verrouillage », décochée par défaut.
 - Windows 10/11, sans service, télémétrie ni dépendance tierce.
 
@@ -33,13 +34,13 @@ Lancer `KeyboardLocker.exe`, choisir le délai et cliquer sur « Verrouiller le 
 
 ## Limites techniques et sécurité
 
-L’application utilise un hook clavier bas niveau Windows dans son propre processus. Si le processus s’arrête, Windows retire le hook. Le délai de sécurité fonctionne tant que le processus et sa boucle de messages restent actifs. Le verrouillage est un filtre logiciel, pas une garantie contre les outils privilégiés ou un arrêt forcé.
+L’application utilise un hook clavier bas niveau Windows dans son propre processus. Si le processus s’arrête, Windows retire le hook. Le délai de sécurité utilise une horloge monotone et fonctionne tant que le processus et sa boucle de messages restent actifs ; si l’échéance survient pendant la veille, le déverrouillage se fait à la reprise. Le verrouillage est un filtre logiciel, pas une garantie contre les outils privilégiés ou un arrêt forcé.
 
 Toutes les frappes clavier, y compris les touches Windows, sont filtrées par défaut. La case d’option permet de laisser passer Alt+F4. Les séquences sécurisées gérées par Windows, comme Ctrl+Alt+Suppr, ne peuvent pas être interceptées par une application ordinaire. Certaines fenêtres élevées ou certains écrans sécurisés peuvent également échapper au filtre. Le clavier n’est donc pas bloqué de façon absolue. L’application ne demande pas les droits administrateur.
 
 ## Compilation et releases automatiques
 
-La GitHub Action compile l’application sur les pull requests et crée une release Windows x64 à chaque push sur la branche par défaut. Les tags suivent le format `v<version>_build-<numéro>`, par exemple `v1.0.0.10_build-4`. Le workflow utilise le `GITHUB_TOKEN` du dépôt avec la permission `contents: write`; aucun secret personnel n’est requis. Voir [`.github/workflows/build-release.yml`](.github/workflows/build-release.yml).
+La GitHub Action compile l’application sur les pull requests et crée une release Windows x64 à chaque push sur la branche par défaut. Les tags suivent le format `v<version>_build-<numéro>`, par exemple `v1.0.0.11_build-5`. Le workflow utilise le `GITHUB_TOKEN` du dépôt avec la permission `contents: write`; aucun secret personnel n’est requis. Voir [`.github/workflows/build-release.yml`](.github/workflows/build-release.yml).
 
 ## Documentation
 

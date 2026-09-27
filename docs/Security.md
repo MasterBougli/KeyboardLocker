@@ -8,7 +8,7 @@ Niveau A : utilitaire local sans compte, réseau, stockage de données ni privil
 
 ## Risques et contrôles
 
-- **Clavier laissé bloqué :** libération à la fermeture, échéance réglable et accès au déverrouillage par souris via la fenêtre ou le menu de notification.
+- **Clavier laissé bloqué :** libération à la fermeture, échéance réglable basée sur une horloge monotone (insensible aux changements de l’heure système) et accès au déverrouillage par souris via la fenêtre ou le menu de notification. Le délai continue pendant la veille et l’hibernation ; la libération intervient dès la reprise de la boucle de messages.
 - **Filtre trop large :** toutes les frappes, y compris les touches Windows, sont filtrées ; Alt+F4 peut être autorisé explicitement. Ctrl+Alt+Suppr et les écrans sécurisés sont contrôlés par Windows et ne sont pas interceptés.
 - **Élévation ou application privilégiée :** l’application s’exécute en utilisateur standard ; la couverture peut différer pour les fenêtres élevées.
 - **Arrêt brutal :** le hook est attaché au processus et Windows le retire lorsque celui-ci s’arrête.

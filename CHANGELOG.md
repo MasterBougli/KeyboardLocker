@@ -2,6 +2,13 @@
 
 Les changements notables du projet sont consignés dans ce fichier.
 
+## [1.0.0.11] - 2026-09-27
+
+### Modifié
+
+- Compte à rebours fondé sur une horloge monotone ; il ne dépend plus de l’heure civile et continue pendant veille et hibernation.
+- Version du projet avancée de `1.0.0.10` à `1.0.0.11`.
+
 ## [1.0.0.10] - 2026-09-27
 
 ### Modifié
