@@ -17,7 +17,8 @@
 - Livraison : compilation sur pull request et publication d’une release à chaque push sur la branche par défaut ; tags de la forme `v<version>_build-<numéro>`.
 - Distribution confirmée : autonome, sans runtime préinstallé ; environ 70 Mo est acceptable.
 - Les deux workflows GitHub Actions des pushes initiaux se sont terminés avec succès et ont publié les releases `v1.0.0.7_build-1` et `v1.0.0.8_build-2`.
-- Version produit actuellement documentée : 1.0.0.9.
+- Tests choisis : checklist manuelle uniquement ; aucun framework de test ni dépendance ajoutés.
+- Version produit actuellement documentée : 1.0.0.10.
 
 ## Fichiers documentaires présents
 
@@ -34,4 +35,4 @@
 
 ## Prochaine action autorisée
 
-Pousser la décision de distribution autonome et la version 1.0.0.9 ; vérifier ensuite la release générée par le workflow.
+Faire les vérifications manuelles décrites dans `docs/testing.md` sur Windows ; elles restent à effectuer.

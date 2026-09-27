@@ -39,7 +39,7 @@ Toutes les frappes clavier, y compris les touches Windows, sont filtrées par d�
 
 ## Compilation et releases automatiques
 
-La GitHub Action compile l’application sur les pull requests et crée une release Windows x64 à chaque push sur la branche par défaut. Les tags suivent le format `v<version>_build-<numéro>`, par exemple `v1.0.0.9_build-3`. Le workflow utilise le `GITHUB_TOKEN` du dépôt avec la permission `contents: write`; aucun secret personnel n’est requis. Voir [`.github/workflows/build-release.yml`](.github/workflows/build-release.yml).
+La GitHub Action compile l’application sur les pull requests et crée une release Windows x64 à chaque push sur la branche par défaut. Les tags suivent le format `v<version>_build-<numéro>`, par exemple `v1.0.0.10_build-4`. Le workflow utilise le `GITHUB_TOKEN` du dépôt avec la permission `contents: write`; aucun secret personnel n’est requis. Voir [`.github/workflows/build-release.yml`](.github/workflows/build-release.yml).
 
 ## Documentation
 

@@ -2,6 +2,13 @@
 
 Les changements notables du projet sont consignés dans ce fichier.
 
+## [1.0.0.10] - 2026-09-27
+
+### Modifié
+
+- Checklist manuelle détaillée pour l’activation, le filtrage clavier, le déverrouillage, la veille et la publication autonome.
+- Version du projet avancée de `1.0.0.9` à `1.0.0.10`.
+
 ## [1.0.0.9] - 2026-09-27
 
 ### Modifié
