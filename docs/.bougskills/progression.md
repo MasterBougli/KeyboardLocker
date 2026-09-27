@@ -15,7 +15,7 @@
 - Licence : GPL-3.0 ; auteur et titulaire : Bougli ; année : 2026.
 - Contributions externes acceptées ; changelog souhaité ; GitHub choisi pour l’hébergement et les releases.
 - Livraison : compilation sur pull request et publication d’une release à chaque push sur la branche par défaut ; tags de la forme `v<version>_build-<numéro>`.
-- Version produit actuellement documentée : 1.0.0.7.
+- Version produit actuellement documentée : 1.0.0.8.
 
 ## Fichiers documentaires présents
 
@@ -25,11 +25,11 @@
 
 ## Points ouverts
 
-- Le dépôt Git local est initialisé sur la branche `main` ; le premier commit reste à créer.
-- L’URL et le nom du dépôt GitHub distant ne sont pas encore établis dans le workspace.
-- Le workflow GitHub Actions est rédigé mais n’a pas été exécuté sur un dépôt distant.
+- Le dépôt public `https://github.com/MasterBougli/KeyboardLocker` est créé ; `main` suit `origin/main`.
+- Le commit initial `6952dfb` a été poussé ; la progression indique le commit de suivi en préparation.
+- Le workflow GitHub Actions a été déclenché par le push initial ; son résultat n’a pas encore été vérifié.
 - Les essais fonctionnels manuels Windows restent à effectuer.
 
 ## Prochaine action autorisée
 
-Préparer le premier commit après revue du contenu. Pour créer un dépôt GitHub distant ou y publier le code, demander la confirmation immédiatement avant l’appel à GitHub et confirmer la cible exacte.
+Pousser la mise à jour de progression/version, puis vérifier le résultat du workflow GitHub Actions lorsque cette vérification est autorisée.

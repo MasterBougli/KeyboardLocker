@@ -2,6 +2,13 @@
 
 Les changements notables du projet sont consignés dans ce fichier.
 
+## [1.0.0.8] - 2026-09-27
+
+### Modifié
+
+- Progression Bougskills mise à jour après la création du dépôt public `MasterBougli/KeyboardLocker` et le push initial sur `main`.
+- Version du projet avancée de `1.0.0.7` à `1.0.0.8`.
+
 ## [1.0.0.7] - 2026-09-27
 
 ### Ajouté
